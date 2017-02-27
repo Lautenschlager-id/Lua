@@ -1,3 +1,5 @@
+--Loads a table via string, like a={test=1} print(loadTable("a.test"))
+
 loadTable = function(s)
 	local list
 	for tbl in s:gmatch("[^%.]+") do
