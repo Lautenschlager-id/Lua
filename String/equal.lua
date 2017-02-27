@@ -1,3 +1,5 @@
+-- Returns a float in a range of [0-1] with the percent of equality between two strings
+
 string.equal=function(str1,str2)
 	local equal2=function(str1,str2)
 		local len = #str1
