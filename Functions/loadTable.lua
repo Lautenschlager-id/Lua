@@ -1,4 +1,5 @@
---Loads a table via string, like a={test=1} print(loadTable("a.test"))
+-- Loads a table via string
+-- a={test=1}; print(loadTable("a.test"))
 
 loadTable = function(s)
 	local list
