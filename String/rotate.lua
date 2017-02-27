@@ -1,3 +1,6 @@
+-- Rotates a text
+-- string.rotate("abc",3,true) = "def"
+
 string.rotate = function(str,rotation,lettersOnly)
 	if lettersOnly then
 		local b,c
