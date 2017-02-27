@@ -1,3 +1,5 @@
+-- Returns YYYY,MO,WE,D,H,M,S based on time (try os.time())
+
 getTime = function(time)
 	if type(time) ~= "number" then return "?" end
 
