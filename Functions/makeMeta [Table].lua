@@ -1,3 +1,6 @@
+-- Creates a metatable enabling math with tables
+-- x = makeMeta(x); x = x + 2
+
 do
 	local collect = function(a,b)
 		if type(a) == "table" then return a,b else return b,a end
