@@ -13,13 +13,16 @@ do
 			return random(...)
 		end
 	end
+end
 
-	table.concat = function(list,sep,f)
-		local txt = ""
-		sep = sep or ""
-		for k,v in next,list do
+table.concat = function(list,sep,f,i,j)
+	local txt = ""
+	sep = sep or ""
+	i,j = i or 1,j or #list
+	for k,v in next,list do
+		if k >= i and k <= j then
 			txt = txt .. (f and f(k,v) or v) .. sep
 		end
-		return txt:sub(1,-1-#sep)
 	end
+	return txt:sub(1,-1-#sep)
 end
