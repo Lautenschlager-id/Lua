@@ -1,23 +1,9 @@
-system.players = function(alivePlayers)
-	local alive,total = 0,0
-	if alivePlayers then
-		alive = {}
-	end
-	for k,v in next,tfm.get.room.playerList do
-		if system.isPlayer(k) then
-			if not v.isDead and not v.isVampire then
-				if alivePlayers then
-					alive[#alive + 1] = k
-				else
-					alive = alive + 1
-				end
-			end
-			total = total + 1
+table.find = function(list,value,index,f)
+	for k,v in next,list do
+		local i = (type(v) == "table" and index and v[index] or v)
+		if (f and f(i) or i) == value then
+			return true,k
 		end
 	end
-	if alivePlayers then
-		return alive
-	else
-		return alive,total
-	end
+	return false,0
 end
