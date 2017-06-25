@@ -1,4 +1,4 @@
--- Enables more than only SQUARE roots.
+-- Roots inside roots are allowed
 -- ∛√(8³) = math.sqrt2(8,{3,2},3)
 
 math.sqrt2=function(number,index,pow)
