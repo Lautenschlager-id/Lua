@@ -5,11 +5,11 @@ serialization = function(i,lastIndex)
 	
 		for k,v in next,i do
 			if type(v) == "string" then
-				out = out .. string.format("@[%s][%s]",string.format("%s[%s]",lastIndex,k),table.concat({string.byte(v,1,#v)},","))
+				out = out .. string.format("@[%s]{%s}",string.format("%s[%s]",lastIndex,k),table.concat({string.byte(v,1,#v)},","))
 			elseif type(v) == "number" then
-				out = out .. string.format("#[%s][%s]",string.format("%s[%s]",lastIndex,k),tostring(v))
+				out = out .. string.format("#[%s]{%s}",string.format("%s[%s]",lastIndex,k),tostring(v))
 			elseif type(v) == "boolean" then
-				out = out .. string.format("![%s][%s]",string.format("%s[%s]",lastIndex,k),tostring(v))
+				out = out .. string.format("![%s]{%s}",string.format("%s[%s]",lastIndex,k),tostring(v))
 			elseif type(v) == "table" then
 				out = out .. serialization(v,string.format("%s[%s]",lastIndex,k))
 			end
@@ -19,7 +19,8 @@ serialization = function(i,lastIndex)
 	elseif type(i) == "string" then
 		local out = {}
 
-		for t,k,v in string.gmatch(i,"([@#!=])%[(.-)%]%[(.-)%]") do
+		for t,k,v in string.gmatch(i,"([@#!])(%[.-%])%{(.-)%}") do
+			print(string.format("%s %s %s",t,k,v))
 			local value
 			if t == "@" then
 				value = string.char((function(bytes)
@@ -38,7 +39,7 @@ serialization = function(i,lastIndex)
 			end
 			
 			local index = {}
-			for j in string.gmatch(k,"[^%[%]]") do
+			for j in string.gmatch(k:sub(2,#k-1),"[^%[%]]") do
 				index[#index + 1] = tonumber(j) or j
 			end
 
@@ -48,12 +49,13 @@ serialization = function(i,lastIndex)
 				local m,n = 1
 				while m <= #index do
 					if not n then
-						out[index[m]] = {}
+						out[index[m]] = (out[index[m]] or {})
 						n = out[index[m]]
 						m = m + 1
 					end
-					
-					n[index[m]] = (m == #index and value or {})
+
+					n[index[m]] = (m ~= #index and (n[index[m]] or {}) or value)
+
 					n = n[index[m]]
 					m = m + 1
 				end
