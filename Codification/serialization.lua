@@ -39,7 +39,7 @@ serialization = function(i,lastIndex)
 			end
 			
 			local index = {}
-			for j in string.gmatch(k:sub(2,#k-1),"[^%[%]]") do
+			for j in string.gmatch(k:sub(2,#k-1),"[^%[%]]+") do
 				index[#index + 1] = tonumber(j) or j
 			end
 
