@@ -1,7 +1,7 @@
-string.split=function(str,split,id)
-    local list={}
-    for val in string.gmatch(str,id and (id==0 and '[^'..(split or '%s')..']+' or string.rep('.',id)) or split) do
-        table.insert(list,val)
-    end
-    return list
+string.split = function(value,pattern,f)
+	local out = {}
+	for v in string.gmatch(value,pattern) do
+		out[#out + 1] = (f and f(v) or v)
+	end
+	return out
 end
