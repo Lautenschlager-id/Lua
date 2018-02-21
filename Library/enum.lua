@@ -22,6 +22,7 @@ local enum = function(list)
 		end,
 		__tostring = function()
 			return "enum"
-		end
+		end,
+		__metatable = 'enum'
 	})
 end
