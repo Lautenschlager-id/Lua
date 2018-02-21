@@ -9,10 +9,10 @@ local enum = function(list)
 	
 	return setmetatable({}, {
 		__call = function(t, index)
-			return out[index] or nil
+			return out[index]
 		end,
 		__index = function(t, index)
-			return list[index] or nil
+			return list[index]
 		end,
 		__pairs = function()
 			return next, list
@@ -22,7 +22,8 @@ local enum = function(list)
 		end,
 		__tostring = function()
 			return "enum"
-		end
+		end,
+		__metatable = 'enum'
 	})
 end
 
