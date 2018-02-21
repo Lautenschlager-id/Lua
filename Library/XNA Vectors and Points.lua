@@ -476,13 +476,11 @@ do
 		vectorX.vector4.zero = vectorX.vector4.__call(nil, 0, 0, 0, 0)
 	end
 	
-	vector2 = setmetatable(vectorX.vector2, { __newindex = globalMeta.__newindex, __index = globalMeta.__index, __metatable = 'vector2',
+	vector2 = setmetatable(vectorX.vector2, { __call = vectorX.vector2.__call, __newindex = globalMeta.__newindex, __index = globalMeta.__index, __metatable = 'vector2' })
 		__call = vectorX.vector2.__call
 	})
-	vector3 = setmetatable(vectorX.vector3, { __newindex = globalMeta.__newindex, __index = globalMeta.__index, __metatable = 'vector3',
+	vector3 = setmetatable(vectorX.vector3, { __call = vectorX.vector3.__call, __newindex = globalMeta.__newindex, __index = globalMeta.__index, __metatable = 'vector3' })
 		__call = vectorX.vector3.__call
 	})
-	vector4 = setmetatable(vectorX.vector4, { __newindex = globalMeta.__newindex, __index = globalMeta.__index, __metatable = 'vector4',
-		__call = vectorX.vector4.__call
-	})
+	vector4 = setmetatable(vectorX.vector4, { __call = vectorX.vector4.__call, __newindex = globalMeta.__newindex, __index = globalMeta.__index, __metatable = 'vector4' })
 end
